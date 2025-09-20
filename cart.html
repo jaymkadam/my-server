@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Global Scoops</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .cart-item:hover {
+            background-color: #fdf2f8;
+        }
+    </style>
+</head>
+<body class="bg-pink-50">
+    <header class="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="ice-cream" class="w-8 h-8"></i>
+                    <h1 class="text-2xl font-bold">Global Scoops</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="hover:text-pink-200 font-medium">Shop</a></li>
+                        <li><a href="#" class="hover:text-pink-200">About</a></li>
+                        <li><a href="#" class="hover:text-pink-200">Contact</a></li>
+                        <li class="relative">
+                            <a href="cart.html" class="flex items-center hover:text-pink-200">
+                                <i data-feather="shopping-cart" class="w-6 h-6"></i>
+                                <span id="cartCount" class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Your Ice Cream Cart</h2>
+            
+            <div id="cartItems" class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <!-- Cart items will be inserted here by JavaScript -->
+                <div class="p-8 text-center text-gray-500" id="emptyCartMessage">
+                    <i data-feather="shopping-cart" class="w-12 h-12 mx-auto text-gray-300 mb-4"></i>
+                    <p class="text-xl">Your cart is empty</p>
+                    <a href="index.html" class="inline-block mt-4 text-pink-600 hover:text-pink-700 font-medium">
+                        Start shopping for delicious ice creams
+                    </a>
+                </div>
+            </div>
+
+            <div id="cartSummary" class="hidden bg-white rounded-xl shadow-md overflow-hidden p-6">
+                <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
+                    <span class="text-lg font-medium text-gray-700">Subtotal</span>
+                    <span id="subtotal" class="text-lg font-bold text-gray-800">$0.00</span>
+                </div>
+                <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-4">
+                    <span class="text-lg font-medium text-gray-700">Shipping</span>
+                    <span class="text-lg font-bold text-gray-800">Free</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-bold text-gray-800">Total</span>
+                    <span id="total" class="text-xl font-bold text-pink-600">$0.00</span>
+                </div>
+                
+                <div class="mt-8">
+                    <a href="monerisCheckout.html" id="checkoutBtn" class="block w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-6 rounded-lg text-center transition">
+                        Proceed to Checkout
+                    </a>
+                    <a href="index.html" class="block mt-4 text-center text-pink-600 hover:text-pink-700 font-medium">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Global Scoops</h3>
+                    <p class="text-gray-400">Bringing you the finest ice cream flavors from around the world since 2015.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Flavors</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Global Scoops. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cartItems');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const cartSummary = document.getElementById('cartSummary');
+        const cartCount = document.getElementById('cartCount');
+        
+        function updateCartDisplay() {
+            // Update cart count
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+            
+            // Clear existing items
+            while (cartItemsContainer.firstChild && cartItemsContainer.firstChild.id !== 'emptyCartMessage') {
+                cartItemsContainer.removeChild(cartItemsContainer.firstChild);
+            }
+            
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                cartSummary.classList.add('hidden');
+                return;
+            }
+            
+            emptyCartMessage.classList.add('hidden');
+            cartSummary.classList.remove('hidden');
+            
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item p-6 border-b border-gray-200 transition';
+                itemElement.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <div class="mb-4 md:mb-0">
+                            <h3 class="text-lg font-medium text-gray-800">${item.name}</h3>
+                            <p class="text-gray-600">$${item.price.toFixed(2)} each</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <button onclick="updateQuantity('${item.id}', -1)" class="bg-gray-200 text-gray-800 px-2 py-1 rounded">-</button>
+                                <span class="px-2">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)" class="bg-gray-200 text-gray-800 px-2 py-1 rounded">+</button>
+                            </div>
+                            <span class="text-lg font-medium text-gray-800">$${itemTotal.toFixed(2)}</span>
+                            <button onclick="removeItem('${item.id}')" class="text-red-500 hover:text-red-700">
+                                <i data-feather="trash-2" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                cartItemsContainer.insertBefore(itemElement, emptyCartMessage);
+            });
+            
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${subtotal.toFixed(2)}`;
+            
+            feather.replace();
+        }
+        
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (!item) return;
+            
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== id);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        
+        // Initialize cart display
+        updateCartDisplay();
+    </script>
+</body>
+</html>

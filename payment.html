@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Global Scoops</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+    </style>
+</head>
+<body class="bg-pink-50">
+    <header class="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="ice-cream" class="w-8 h-8"></i>
+                    <h1 class="text-2xl font-bold">Global Scoops</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html" class="hover:text-pink-200 font-medium">Shop</a></li>
+                        <li><a href="#" class="hover:text-pink-200">About</a></li>
+                        <li><a href="#" class="hover:text-pink-200">Contact</a></li>
+                        <li class="relative">
+                            <a href="cart.html" class="flex items-center hover:text-pink-200">
+                                <i data-feather="shopping-cart" class="w-6 h-6"></i>
+                                <span id="cartCount" class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+            <iframe id="monerisIframe" srcdoc='
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+                <script src="https://gatewayt.moneris.com/chkt/js/chkt_v1.00.js"></script>
+                </head>
+                <body>
+                    <div id="outerDiv" style="overflow:hidden;">
+                    <div id="monerisCheckout" ></div>
+                    </div>
+                <script>
+                    let myCheckout = new monerisCheckout();
+                    myCheckout.setMode("qa");
+                    myCheckout.setCheckoutDiv("monerisCheckout");
+                    myCheckout.setCallback("page_loaded", testPageLoad);
+                    myCheckout.setCallback("payment_receipt", testPayReceipt);
+                    myCheckout.setCallback("payment_complete", testPayComplete);
+                    myCheckout.setCallback("cancel_transaction", testCancel);
+                    myCheckout.setCallback("error_event", testCancel);
+                    myCheckout.setCallback("payment_submitted", testPaymentSubmitted);
+                    myCheckout.startCheckout("1758295232yAOsFuUx5VtPDb22iB8rgafadePbRT");
+                    myCheckout.setCallback("page_closed", testCancel);
+                    
+                    function testPageLoad(res){
+                        console.log(res)
+                    }
+                    
+                    function testPaySubmit(res){
+                        console.log(res)    
+                    }
+                    
+                    function testPayReceipt(res){
+                        console.log(res)
+                    }
+                    
+                    function testPayComplete(res){
+                        console.log(res)
+                    }
+                    
+                    function testPaymentSubmitted(res){
+                        console.log(res)
+                    }
+                    
+                    function testCancel(res){
+                        console.log(res)
+                        myCheckout.closeCheckout(JSON.parse(res).ticket)
+                    }
+                </script>
+                </body>
+                </html>
+            '></iframe>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Global Scoops</h3>
+                    <p class="text-gray-400">Bringing you the finest ice cream flavors from around the world since 2015.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Flavors</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Global Scoops. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Update cart count
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        document.getElementById('cartCount').textContent = count;
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Scoops - World's Finest Ice Creams</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .ice-cream-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f472b6;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-pink-50">
+    <header class="bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="ice-cream" class="w-8 h-8"></i>
+                    <h1 class="text-2xl font-bold">Global Scoops</h1>
+                </div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#" class="hover:text-pink-200 font-medium">Home</a></li>
+                        <li><a href="#" class="hover:text-pink-200">About</a></li>
+                        <li><a href="#" class="hover:text-pink-200">Contact</a></li>
+                        <li class="relative">
+                            <a href="cart.html" class="flex items-center hover:text-pink-200">
+                                <i data-feather="shopping-cart" class="w-6 h-6"></i>
+                                <span id="cartCount" class="cart-count hidden">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="mt-8 text-center">
+                <h2 class="text-4xl font-bold mb-4">Discover Sweet Treasures From Around The World</h2>
+                <p class="text-xl max-w-2xl mx-auto">Artisanal ice creams crafted with love from different corners of the globe</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Italian Ice Cream -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden ice-cream-card transition-all duration-300" data-aos="fade-up">
+                <img src="images/gelatofiorentina.jpg" alt="Gelato Fiorentino" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800">Gelato Fiorentino</h3>
+                    <p class="text-gray-600 mt-1">Florence, Italy</p>
+                    <p class="text-gray-700 mt-3">Creamy traditional Italian gelato with rich vanilla bean and Madagascar bourbon</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-2xl font-bold text-pink-600">$5.99</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('gelato-fiorentino', -1)">-</button>
+                            <span id="gelato-fiorentino-quantity" class="px-2">0</span>
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('gelato-fiorentino', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('gelato-fiorentino', 'Gelato Fiorentino', 5.99)" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Japanese Ice Cream -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden ice-cream-card transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <img src="images/matchaicecream.jpg" alt="Matcha Kyoto" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800">Matcha Kyoto</h3>
+                    <p class="text-gray-600 mt-1">Kyoto, Japan</p>
+                    <p class="text-gray-700 mt-3">Premium ceremonial grade matcha ice cream with subtle sweetness and earthy tones</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-2xl font-bold text-pink-600">$6.49</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('matcha-kyoto', -1)">-</button>
+                            <span id="matcha-kyoto-quantity" class="px-2">0</span>
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('matcha-kyoto', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('matcha-kyoto', 'Matcha Kyoto', 6.49)" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- French Ice Cream -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden ice-cream-card transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <img src="images/lavenderIcecream.png" alt="Lavande Provençale" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800">Lavande Provençale</h3>
+                    <p class="text-gray-600 mt-1">Provence, France</p>
+                    <p class="text-gray-700 mt-3">Delicate lavender-infused ice cream with hints of honey and vanilla</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-2xl font-bold text-pink-600">$7.25</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('lavande-provencale', -1)">-</button>
+                            <span id="lavande-provencale-quantity" class="px-2">0</span>
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('lavande-provencale', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('lavande-provencale', 'Lavande Provençale', 7.25)" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Turkish Ice Cream -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden ice-cream-card transition-all duration-300" data-aos="fade-up">
+                <img src="images/Maras-Ice-Cream-4.jpg" alt="Maraş Delight" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800">Maraş Delight</h3>
+                    <p class="text-gray-600 mt-1">Kahramanmaraş, Turkey</p>
+                    <p class="text-gray-700 mt-3">Stretchy, chewy dondurma with mastic resin and sahlep for unique texture</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-2xl font-bold text-pink-600">$6.99</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('maras-delight', -1)">-</button>
+                            <span id="maras-delight-quantity" class="px-2">0</span>
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('maras-delight', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('maras-delight', 'Maraş Delight', 6.99)" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- American Ice Cream -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden ice-cream-card transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <img src="images/rocky-road-icecream.jpg" alt="Rocky Road NYC" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800">Rocky Road NYC</h3>
+                    <p class="text-gray-600 mt-1">New York, USA</p>
+                    <p class="text-gray-700 mt-3">Classic chocolate ice cream with marshmallows, almonds and chocolate chunks</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-2xl font-bold text-pink-600">$5.49</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('rocky-road-nyc', -1)">-</button>
+                            <span id="rocky-road-nyc-quantity" class="px-2">0</span>
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('rocky-road-nyc', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('rocky-road-nyc', 'Rocky Road NYC', 5.49)" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Argentinian Ice Cream -->
+            <div class="bg-white rounded-xl shadow-md overflow-hidden ice-cream-card transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <img src="images/dulce-de-leche-ice-cream-dessert.jpg" alt="Dulce Porteño" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800">Dulce Porteño</h3>
+                    <p class="text-gray-600 mt-1">Buenos Aires, Argentina</p>
+                    <p class="text-gray-700 mt-3">Creamy dulce de leche ice cream with swirls of caramel and cookie pieces</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-2xl font-bold text-pink-600">$6.75</span>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('dulce-porteno', -1)">-</button>
+                            <span id="dulce-porteno-quantity" class="px-2">0</span>
+                            <button class="bg-gray-200 text-gray-800 px-2 py-1 rounded" onclick="updateQuantity('dulce-porteno', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('dulce-porteno', 'Dulce Porteño', 6.75)" class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <a href="cart.html" class="inline-flex items-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full text-lg transition">
+                <i data-feather="shopping-cart" class="w-5 h-5 mr-2"></i>
+                View Cart
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Global Scoops</h3>
+                    <p class="text-gray-400">Bringing you the finest ice cream flavors from around the world since 2015.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Flavors</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i data-feather="twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Global Scoops. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations and icons
+        AOS.init();
+        feather.replace();
+
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = count;
+            if (count > 0) {
+                cartCount.classList.remove('hidden');
+            } else {
+                cartCount.classList.add('hidden');
+            }
+        }
+
+        function updateQuantity(id, change) {
+            const quantityElement = document.getElementById(`${id}-quantity`);
+            let quantity = parseInt(quantityElement.textContent) + change;
+            if (quantity < 0) quantity = 0;
+            quantityElement.textContent = quantity;
+        }
+
+        function addToCart(id, name, price) {
+            const quantityElement = document.getElementById(`${id}-quantity`);
+            const quantity = parseInt(quantityElement.textContent);
+            
+            if (quantity <= 0) return;
+            
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    quantity
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Reset quantity
+            quantityElement.textContent = '0';
+            
+            // Show success message
+            alert(`${quantity} ${name} added to cart!`);
+        }
+
+        // Initialize cart count on page load
+        updateCartCount();
+    </script>
+</body>
+</html>

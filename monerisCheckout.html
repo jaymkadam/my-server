@@ -1,0 +1,56 @@
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+<script src="https://gatewayt.moneris.com/chkt/js/chkt_v1.00.js"></script>
+</head>
+
+<body>
+	<div id="outerDiv" style="overflow:hidden;">
+	<div id="monerisCheckout" ></div>
+	</div>
+<script>
+	let myCheckout = new monerisCheckout();
+	myCheckout.setMode("qa");
+	myCheckout.setCheckoutDiv("monerisCheckout");
+	myCheckout.setCallback("page_loaded", testPageLoad);
+	myCheckout.setCallback("payment_receipt", testPayReceipt);
+	myCheckout.setCallback("payment_complete", testPayComplete);
+	myCheckout.setCallback("cancel_transaction", testCancel);
+	myCheckout.setCallback("error_event", testCancel);
+	myCheckout.setCallback("payment_submitted", testPaymentSubmitted);
+	myCheckout.startCheckout("1758323097pJ9G2442h4swvNKQ6r2rV5334SSDYT");
+	myCheckout.setCallback("page_closed", testCancel);
+	
+	
+	
+	function testPageLoad(res){
+		console.log(res)
+	}
+	
+	function testPaySubmit(res){
+		console.log(res)	
+	}
+	
+	function testPayReceipt(res){
+		console.log(res)
+	}
+	
+	function testPayComplete(res){
+		console.log(res)
+	}
+	
+	function testPaymentSubmitted(res){
+		console.log(res)
+	}
+	
+	function testCancel(res){
+		console.log(res)
+		myCheckout.closeCheckout(JSON.parse(res).ticket)
+	}
+	
+	
+</script>
+
+</body>
+</html>
